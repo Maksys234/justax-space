@@ -2,7 +2,8 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabaseClient';
+// ИЗМЕНЕНИЕ ЗДЕСЬ: Используем относительный путь вместо псевдонима
+import { createClient } from '../../lib/supabase/client'; 
 import { useRouter } from 'next/navigation';
 
 export default function AuthPage() {
@@ -12,7 +13,7 @@ export default function AuthPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = createClient(); 
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,9 +29,7 @@ export default function AuthPage() {
     if (error) {
       setError(error.message);
     } else {
-      // Show a message to check email for verification
       alert('Registration successful! Please check your email to verify your account.');
-      // Optionally, you can switch to the login view
       setIsLogin(true);
     }
     setLoading(false);
